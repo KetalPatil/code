@@ -1,0 +1,1098 @@
+@1.Write a C++ program to create a calculator for an arithmetic operator
+#include <iostream>
+using namespace std;
+int main()
+{
+int a, b, c;
+char ch;
+cout << "Enter first no.:- " << endl;
+cin >> a;
+cout << "Enter first no.:- " << endl;
+cin >> b;
+cout << "Options:- " <<endl;
+cout << "+(Addition)\n-(Subtraction)\n*(Multipliaction)\n/(Division)" << 
+endl;
+cout << "\nEnter your choice:- " << endl;
+cin >> ch;
+switch (ch)
+{
+case '+':
+c = a + b;
+cout << "Addition is " << c << endl;
+break;
+case '-':
+c = a - b;
+cout << "Subtraction is " << c << endl;
+break;
+case '*':
+c = a * b;
+cout << "Multiplication is " << c << endl;
+break;
+case '/':
+c = a / b;
+cout << "Division is " << c << endl;
+break;
+default:
+cout << "Invalid Input" << endl;
+break;
+}
+return 0;
+}
+
+
+
+@2. Write a C++ program to create employee biodata using multiple inheritance
+#include <iostream>
+using namespace std;
+class per_info
+{
+private:
+string name, adress;
+int mobile_no;
+public:
+void get_info()
+{
+cout << "Enter Name:- ";
+cin >> name;
+cout << "Enter Address:- ";
+cin >> adress;
+cout << "Enter Mobile No.:- ";
+cin >> mobile_no;
+}
+void put_info()
+{
+cout << "Name:- " << name << endl;
+cout << "Adress:- " << adress << endl;
+cout << "Mobile No.:- " << mobile_no << endl;
+}
+};
+class job_info
+{
+int id;
+string resignation;
+public:
+void job()
+{
+cout << "Enter Employee ID:- ";
+cin >> id;
+cout << "Enter Resignation:- ";
+cin >> resignation;
+}
+void display()
+{
+cout << "Employee Id:- " << id << endl;
+cout << "Resignation:- " << resignation << endl;
+}
+};
+class employee : public per_info, public job_info
+{
+public:
+void input()
+{
+get_info();
+job();
+}
+void output()
+{
+put_info();
+display();
+}
+};
+int main()
+{
+employee e;
+e.input();
+e.output();
+return 0;
+}
+
+
+@3. Write a C++ program to perform different arithmetic operations on complex number using 
+operator overloading
+#include<iostream>
+using namespace std;
+class complex
+{
+private:
+int real;
+int imag;
+public:
+complex()
+{
+real=0;
+imag=0;
+}
+complex(int r , int i)
+{
+real=r;
+imag=i;
+}
+friend istream &operator>>(istream &in, complex&x)
+{
+cout<<endl;
+cout<<"\t Enter the real part of complex no:";
+cin>>x.real;
+cout<<"\n";
+cout<<"\t Enter the Imaginary part of complex no:";
+cin>>x.imag;
+cout<<endl;
+}
+friend ostream &operator<<(ostream &out, complex&x)
+{
+if(x.real==0)
+{
+out<<x.imag<<"i"<<endl;
+}
+else if(x.imag==0)
+{
+out<<x.real<<endl;
+}
+else if(x.imag==0 && x.real)
+{
+out<<"0"<<endl;
+}
+else{
+out<<" "<<x.real<<"+"<<x.imag<<"i"<<endl;
+}
+return out;
+}
+complex operator+ (complex z)
+{
+complex temp;
+temp.real=real+z.real;
+temp.imag=real+z.real;
+return temp;
+}
+complex operator* (complex z)
+{
+complex temp;
+temp.real=(real * z.real)-(imag * z.imag);
+temp.imag=(real * z.imag)+(z.real * z.imag);
+return temp;
+}
+};
+int main()
+{
+complex c1,c2,c3,c4;
+cout<<"For First complex Number:"<<endl;
+cin>>c1;
+cout<<"\n First Complex number is :"<<c1<<endl;
+cout<<"For Second complex Number :";
+cin>>c2;
+cout<<endl;
+cout<<"Second Complex number is :"<<c2<<endl;
+c3=c1+c2;
+cout<<"Addition of complex number is :"<<c3<<endl;
+c4=c1*c2;
+cout<<"Multiplication of Complex Number is:"<<c4<<endl;
+return 0;
+}
+
+@#include<iostream>
+#include<stdio.h>
+using namespace std;
+class complex
+{
+        int real;
+        float image;
+        public:
+        void getdata()
+        {
+                cout<<"\n enter the real part of the complex :: ";
+                cin>>real;
+                cout<<"\n enter the imaginary part of the complex :: ";
+                cin>>image;
+        }
+        void operator + (complex);
+        void operator - (complex);
+        void operator * (complex);
+        
+};
+
+void complex :: operator +  (complex c1)
+{
+        complex temp;
+        temp.real=real+c1.real;
+        temp.image=image+c1.image;
+        if (temp.image>=0)
+        {
+                cout<<"\n complex no. after addition :: ";
+                cout<<temp.real<<"+"<<temp.image<<"i\n";
+        }
+        else
+        {
+                cout<<"\n complex no. after addition :: ";
+                cout<<temp.real<<temp.image<<"i\n";
+        }
+}
+void complex ::operator-(complex c1)
+{
+        complex temp;
+        temp.real = real-c1.image;
+        temp.image= image-c1.image;
+        if (temp.image>=0)
+        {
+                cout<<"\n complex no. after subtraction :: ";
+                cout<<"\n temp.real"<<"+"<<temp.image<<"i\n";
+        }
+        else
+        {
+                cout<<"\n complex no. after subtraction :: ";
+                cout<<temp.real<<temp.image<<"i\n";
+    }
+}
+void complex :: operator *  (complex c1)
+{
+        complex temp;
+        temp.real=((real*c1.real)-(image*c1.image));
+        temp.image=((real*c1.image)+(image*c1.real));
+        if (temp.image>=0)
+        {
+                cout<<"\n complex no. after amultiplication :: ";
+                cout<<temp.real<<"+"<<temp.image<<"i\n";
+        }
+        else
+        {
+                cout<<"\n complex no. after multiplication :: ";
+                cout<<temp.real<<temp.image<<"i\n";
+        }
+}
+int main()
+{
+
+        complex c1, c2;
+        int n;
+        do
+        {
+                cout<<"\n 1. Input data for complex no. ";
+                cout<<"\n 2. Addition of complex no. ";
+                cout<<"\n 3. Subtraction of complex no. ";
+                cout<<"\n 4. Multiplication of complex no. ";
+                cout<<"\n 5. Quit";
+                cout<<"\n Enter your choice :: ";
+                cin>>n;
+                switch(n)
+
+                {
+                         case 1:
+                         cout<<endl<<"\n Enter the data for First Complex No......";
+                         c1.getdata();
+                         cout<<endl<<"\n Enter the data for seconds Complex No.....";
+                         c2.getdata();
+
+                         break;
+
+                         case 2:
+                         c1+c2;
+
+                         break;
+
+                         case 3:
+                         c1-c2;
+
+                         break;
+                         
+                         case 4:
+                         c1*c2;
+
+                         break;
+
+                         case 5:
+                         exit(1);
+                         break;
+                        }
+                } while (n!=5);
+     return 0;
+}
+
+
+
+
+@4. Crete User defined exception to check the following conditions and throw the exception if the 
+criterion does not meet. 
+a. User has age between 18 and 55 
+b. User stays has income between Rs. 50,000 – Rs. 1,00,000 per month 
+c. User stays in Pune/ Mumbai/ Bangalore / Chennai 
+d. User has 4-wheeler 
+Accept age, Income, City, Vehicle from the user and check for the conditions mentioned above. If 
+any of the condition not met then throw the exception.
+#include <bits/stdc++.h>
+using namespace std;
+class user
+{
+private:
+int age;
+int vehicle;
+int income;
+string city;
+public:
+void Age()
+{
+cout << "Enter the Age : ";
+cin >> age;
+try
+{
+if (age < 18 || age > 55)
+{
+throw age;
+}
+}
+catch (int)
+{
+cout << "Age is Invalid" << endl;
+}
+}
+void Income()
+{
+cout << "Enter the Income : ";
+cin >> income;
+try
+{
+if (income < 50000 || income > 100000)
+{
+throw income;
+}
+}
+catch (int)
+{
+cout << "Income is Invalid" << endl;
+}
+}
+void Vehicle()
+{
+cout << "\nEnter :\n1) 2 Wheeler \n2)4 Wheeler : ";
+cin >> vehicle;
+try
+{
+if (vehicle == 1)
+{
+throw vehicle;
+}
+}
+catch (int)
+{
+cout << "Choosen Vehicle is invalid" << endl;
+}
+}
+void City()
+{
+cout << "Enter the city:";
+cin >> city;
+try
+{
+// if ((!strcmp(city, "pune")) || (!strcmp(city, "mumbai")) || 
+(!strcmp(city, "chennai")) || (!strcmp(city, "delhi")))
+if (city != "pune" && city != "mumbai" && city != "chennai" &&
+city != "delhi")
+{
+throw city;
+}
+}
+catch (string)
+{
+cout << "Invalid city" << endl;
+}
+}
+};
+int main()
+{
+user u;
+u.Age();
+u.Income();
+u.Vehicle();
+u.City();
+return 0;
+}
+
+
+@5. Develop an object oriented program in C++ to create a database of student information system 
+using constructor, default constructor, Copy constructor, destructor, static member functions, friend 
+class, this pointer, inline code and dynamic memory allocation operators-new and delete.
+#include <iostream>
+#include <string>
+using namespace std;
+class student;
+class per_info
+{
+private:
+string lic, dob, blood;
+public:
+per_info()
+{
+lic = "SOHA2003";
+dob = "08 dec 2003";
+blood = "AB+";
+}
+~per_info()
+{
+cout << "Personal detailed closed" << endl;
+}
+friend class student;
+};
+class student
+{
+private:
+string name, address, year;
+int rollno;
+static int count;
+long long mobile;
+per_info obj; // Add a per_info object here
+public:
+student()
+{
+count++;
+name="Soham";
+address="Pune";
+rollno=13;
+year="SY";
+mobile= 9420193446;
+}
+inline static void incount()
+{
+count++;
+}
+inline static void showcount()
+{
+cout << "The no. of student:- " << count << endl;
+}
+~student()
+{
+cout << "Student detailed closed...." << endl;
+}
+// Copy constructor
+student(const student &obj)
+{
+this->name = obj.name;
+this->address = obj.address;
+this->rollno = obj.rollno;
+this->year = obj.year;
+this->mobile = obj.mobile;
+this->obj = obj.obj; // Copy the per_info object
+}
+void create(per_info &info); // Pass per_info by reference
+void display(per_info &info); // Pass per_info by reference
+};
+int student::count = 0;
+void student::create(per_info &info)
+{
+cout << "Enter Name:- ";
+cin >> name;
+cout << "Enter address:- ";
+cin >> address;
+cout << "Roll No.:- ";
+cin >> rollno;
+cout << "Year: ";
+cin >> year;
+cout << "Mobile:- ";
+cin >> mobile;
+// Set personal info from the provided info object
+obj = info;
+cout << "Enter Lic no:- ";
+cin >> obj.lic;
+cout << "Enter Date of Birth:- ";
+cin >> obj.dob;
+cout << "Enter Blood Group:- ";
+cin >> obj.blood;
+}
+void student::display(per_info &info)
+{
+cout << "Name:- " << name << endl;
+cout << "address:- " << address << endl;
+cout << "Roll No.:- " << rollno << endl;
+cout << "year:- " << year << endl;
+cout << "Mobile:- " << mobile << endl;
+cout << "Lic.No.:- " << obj.lic << endl;
+cout << "Date of Birth:- " << obj.dob << endl;
+cout << "Blood Group:- " << obj.blood << endl;
+}
+int main()
+{
+int n;
+int ch;
+char ans;
+cout << "\nENTER NO OF STUDENTS :" << endl;
+cin >> n;
+student *sobj = new student[n];
+per_info *pobj = new per_info[n];
+do
+{
+cout << ("\n Menu \n 1. Create Database \n 2. Display Database \n 3. 
+Copy Constructor\n 4. Default Constructor \n 5. Delete (Destructor)");
+cout << "\n Enter your Choice: ";
+cin >> ch;
+switch (ch)
+{
+case 1:
+{
+for (int i = 0; i < n; i++)
+{
+sobj[i].create(pobj[i]);
+sobj[i].incount();
+}
+break;
+}
+case 2:
+{
+sobj[0].showcount();
+for (int i = 0; i < n; i++)
+{
+sobj[i].display(pobj[i]);
+}
+break;
+}
+case 3:
+{
+student obj1;
+per_info obj2;
+obj1.create(obj2);
+student obj3(obj1);
+cout << "\n Copy Constructor is called \n";
+obj3.display(obj2);
+break;
+}
+case 4:
+{
+student obj1;
+per_info obj2;
+cout << "\n Default Constructor is called \n";
+obj1.display(obj2);
+break;
+}
+case 5:
+{
+delete[] sobj;
+delete[] pobj;
+break;
+}
+}
+cout << "\n Want to continue:(y/n):- ";
+cin >> ans;
+} while (ans == 'y');
+return 0;
+}
+
+
+@7. Write a C++ menu driven program that will create a data file and implement the following 
+operations on data:
+a.Search the specific item
+b.Display the item
+C.Update the item
+#include <bits/stdc++.h>
+using namespace std;
+class telephone
+{
+public:
+string name;
+string no;
+void get_data()
+{
+cout << "Enter your name:- ";
+// cin >> name;
+cin.ignore();
+getline(cin,name); //For Considering space in String
+cout << "Enter telephone number:- ";
+cin >> no;
+}
+};
+int main()
+{
+int ch;
+int count = 0;
+telephone t[100];
+fstream file;
+int ch1;
+string na;
+string n;
+do
+{
+cout << "\nOptions:- " << endl;
+cout << "1.Enter new number \n2.Display Numbers \n3.Search 
+Number\n4.Exit\n";
+cout << "Enter your choice:- ";
+cin >> ch;
+switch (ch)
+{
+case 1:
+file.open("Directory.txt", ios::app);
+t[count].get_data();
+file.write(reinterpret_cast<char *>(&t[count]), sizeof(t[count]));
+count++;
+break;
+case 2:
+file.open("Directory.txt");
+cout << "Name\t\tPhone No.:- " << endl;
+for (int i = 0; i < count; i++)
+{
+file.read(reinterpret_cast<char *>(&t[i]), sizeof(t[i]));
+cout << t[i].name << "\t\t" << t[i].no << endl;
+}
+break;
+case 3:
+file.open("Directory.txt");
+cout << "Options\n";
+cout << "1.Search By Name\n2.Search By Number\n";
+cout << "Enter Your choice:- ";
+cin >> ch1;
+switch (ch1)
+{
+case 1:
+cout << "Enter Name:- ";
+cin.ignore();
+getline(cin,na);
+for (int i = 0; i < count; i++)
+{
+file.read(reinterpret_cast<char *>(&t[i]), sizeof(t[i]));
+// if(strcmp(t[i].name,na)==0)
+if (t[i].name == na)
+{
+cout << t[i].name << "\t-" << t[i].no << endl;
+}
+}
+break;
+case 2:
+cout << "Enter Number:- ";
+cin >> n;
+for (int i = 0; i < count; i++)
+{
+file.read(reinterpret_cast<char *>(&t[i]), sizeof(t[i]));
+// if(strcmp(t[i].no,n)==0)
+if (t[i].no == n)
+{
+cout << t[i].name << "\t\t" << t[i].no << endl;
+}
+}
+break;
+default:
+cout << "Invalid Input\n";
+break;
+}
+break;
+case 4:
+cout << "Exit!\n";
+break;
+default:
+cout << "Invalid Choice\n";
+break;
+}
+} while (ch != 4);
+return 0;
+}
+
+
+@12. Write a C++ program using template that inputs, sorts and outputs an integer array and a float 
+array for selection sort
+#include <iostream>
+using namespace std;
+int n;
+template<class T>
+#define size 20
+void sort(T a[size])
+{
+int i,j;
+T temp;
+for(i=0; i<n; i++)
+{
+for(j=i+1;j<n;j++)
+{
+if(a[i]>a[j])
+{
+temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
+}
+for(i=0;i<n;i++)
+{
+cout<<a[i]<<", ";
+}
+}
+int main()
+{
+int a[size],ch;
+float b[size];
+cout<<"Menu"<<endl;
+cout<<"1.Integer Array"<<endl;
+cout<<"2.Float Array"<<endl;
+cout<<"Enter your choice:- ";
+cin>>ch;
+switch(ch)
+{
+case 1:
+cout<<"Enter size of Array:- ";
+cin>>n;
+cout<<"Enter Array Element:- "<<endl;
+for(int i=0;i<n;i++)
+{
+cin>>a[i];
+}
+sort(a);
+break;
+case 2:
+cout<<"Enter size of Array:- ";
+cin>>n;
+cout<<"Enter Array Element:- "<<endl;
+for(int i=0;i<n;i++)
+{
+cin>>b[i];
+}
+sort(b);
+break;
+}
+return 0;
+}
+
+
+@13. Perform Function Overloading C++ Concept for calculate sqaure of different data types.
+#include<iostream>
+using namespace std;
+int square(int a)
+{
+int b;
+b=a*a;
+return b;
+}
+float square(float a)
+{
+float b;
+b=a*a;
+return b;
+}
+int main()
+{
+int n1,s1;
+cout<<"Enter no. for square:- ";
+cin>>n1;
+s1=square(n1);
+float n2,s2;
+cout<<"Enter no. for square:- ";
+cin>>n2;
+s2=square(n2);
+cout<<"Square of integer = "<<s1<<endl;
+cout<<"Square of float = "<<s2<<endl;
+return 0;
+}
+
+@function overloading square
+#include <iostream>
+using namespace std;
+
+
+void square(int a)
+{
+cout << "square= " << (a * a);
+}
+
+void square(double a)
+{
+	cout << endl << "square = " << (a * a);
+}
+
+
+int main()
+{
+	square(10);
+	square(5.3);
+    	return 0;
+}
+
+
+@16. Implement any C++ Program which eloborate virtual function concept
+#include <iostream>
+using namespace std;
+class base
+{
+int x, y;
+public:
+virtual void get_data()
+{
+cout << "Enter value for x & y:- ";
+cin >> x >> y;
+}
+virtual void put_data()
+{
+cout << "X = " << x;
+cout << "Y = " << y;
+}
+};
+class derived:public base
+{
+int a, b;
+public:
+virtual void get_data()
+{
+cout << "Enter value for x & y:- ";
+cin >> a >> b;
+}
+virtual void put_data()
+{
+cout << "A = " << a;
+cout << "B = " << b;
+}
+};
+int main()
+{
+base *ptr;
+base b;
+derived d;
+ptr = &b;
+ptr->get_data();
+ptr->put_data();
+ptr = &d;
+ptr->get_data();
+ptr->put_data();
+return 0;
+}
+
+
+@17.Perform A C++ Program for Identification of prime number         
+#include<iostream>
+using namespace std;
+int prime(int n)
+{
+int flag=0;
+for (int i = 2; i < n; i++)
+{
+if(n%i==0)
+{
+flag=1;
+break;
+}
+}
+return flag;
+}
+int main()
+{
+int n, a;
+cout<<"Enter No.:- ";
+cin>>n;
+a=prime(n);
+if(a==1)
+{
+cout<<"The given no. is not prime no."<<endl;
+}
+else
+{
+cout<<"The given no. is prime no."<<endl;
+}
+return 0;
+}
+
+@prime
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n, i, c = 0;
+    cout << "Enter any number n: "; cin>>n;
+    for (i = 1; i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+           c++;
+        }
+    }
+    if (c == 2)
+    {
+       cout << "n is a Prime number" << endl;
+    }
+    else
+    {
+         cout << "n is not a Prime number" << endl; 
+    }
+    return 0;    
+}
+
+
+@18. Using Function Overloading calculate area of Rectangle,Tringle,Square using C++.
+#include<iostream>
+using namespace std;
+int area(int a, int b)
+{
+int n1 = a * b;
+cout << "The area of Rectangle is " << n1 << endl;
+return n1;
+}
+int area(int a)
+{
+int n2 = a * a;
+cout << "The area of Square is: " << n2 << endl;
+return n2;
+}
+float area(float base, float height)
+{
+float n3 = 0.5 * base * height;
+cout << "The area of Triangle is: " << n3 << endl;
+return n3;
+}
+int main()
+{
+int length, breadth, side;
+float base,height;
+cout << "Enter Length & Breadth of Rectangle: ";
+cin >> length >> breadth;
+area(length, breadth);
+cout << "Enter Side of Square: ";
+cin >> side;
+area(side);
+cout << "Enter Base & Height of Triangle: ";
+cin >> base >> height;
+area(base, height);
+return 0;
+}
+
+
+@20.Implement any C++ Program which eloborate virtual function concept
+#include <iostream>
+using namespace std;
+class base
+{
+int x, y;
+public:
+virtual void get_data()
+{
+cout << "Enter value for x & y:- ";
+cin >> x >> y;
+}
+virtual void put_data()
+{
+cout << "X = " << x;
+cout << "Y = " << y;
+}
+};
+class derived:public base
+{
+int a, b;
+public:
+virtual void get_data()
+{
+cout << "Enter value for x & y:- ";
+cin >> a >> b;
+}
+virtual void put_data()
+{
+cout << "A = " << a;
+cout << "B = " << b;
+}
+};
+int main()
+{
+base *ptr;
+base b;
+derived d;
+ptr = &b;
+ptr->get_data();
+ptr->put_data();
+ptr = &d;
+ptr->get_data();
+ptr->put_data();
+return 0;
+}
+
+
+@21. Calculate square and cube of given number using inline function.
+#include<iostream>
+using namespace std;
+class base
+{
+int square,cube;
+public:
+inline void cal_sq(int n)
+{
+square=n*n;
+}
+inline void cal_cu(int n)
+{
+cube=n*n*n;
+}
+inline void display()
+{
+cout<<"Square = "<<square<<endl;
+cout<<"Cube = "<<cube<<endl;
+}
+};
+int main()
+{
+int n;
+base b;
+cout<<"Enter No. For calculating Square & Cube:- ";
+cin>>n;
+b.cal_sq(n);
+b.cal_cu(n);
+b.display();
+return 0;
+}
+
+
+@22. Implement a C++ Program for display student test for different 5 subjects marks using multilevel 
+Inheritance.
+#include<iostream>
+using namespace std;
+class info
+{
+private:
+string name;
+int roll_no;
+public:
+void get_info()
+{
+cout<<"Enter name of student:- ";
+cin>>name;
+cout<<"Enter Roll No. of Student:- ";
+cin>>roll_no;
+}
+void put_info()
+{
+cout<<"Name of Student: "<<name<<endl;
+cout<<"Roll No. of Student:- "<<roll_no<<endl;
+}
+};
+class marks:public info
+{
+int math,phy,chem,bio,cs;
+public:
+void get_marks()
+{
+cout<<"Enter Marks for Maths:- ";
+cin>>math;
+cout<<"Enter Marks for Physics:- ";
+cin>>phy;
+cout<<"Enter Marks for Chemistry:- ";
+cin>>chem;
+cout<<"Enter Marks for Biology:- ";
+cin>>bio;
+cout<<"Enter Marks for CS:- ";
+cin>>cs;
+}
+void put_marks()
+{
+cout<<"Maths:- "<<math<<endl;
+cout<<"Physics:- "<<phy<<endl;
+cout<<"Chemistry:- "<<chem<<endl;
+cout<<"Biology:- "<<bio<<endl;
+cout<<"CS:- "<<cs<<endl;
+}
+};
+class subject:public marks
+{
+public:
+void input()
+{
+get_info();
+get_marks();
+}
+void output()
+{
+cout<<endl<<"Students Information"<<endl;
+put_info();
+put_marks();
+}
+};
+int main()
+{
+subject s;
+s.input();
+s.output();
+return 0;
+}
